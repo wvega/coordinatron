@@ -5,26 +5,202 @@ import math
 import random
 
 
+TRM = 3070.54
 products = [
     {
-        'name': 'Humvee Pilot Sunglasses, Grey Polarized Lens, Black Frame 52 mm',
-        'price': 16.99,
+        'name': '[W] Princeton Tec Meridian Strobe',
+        'price': 29.99,
         'sale-tax': 0,
         'shipping-cost': 0,
-        'declared-price': 8,
-        'weight': 0.05,
-        'tracking-code': 'LeisurePro'
+        'declared-price': 14.99,
+        'weight': 0.5,
+        'tracking-code': 'PTCMS'
     },{
-        'name': 'Blue Reef Orca Torch 700 Lumen LED Dive Light Kit',
-        'price': 99.95,
+        'name': '[W] Trident Divemaster Underwater LED Strobe',
+        'price': 44.99,
+        'sale-tax': 0,
+        'shipping-cost': 6.49,
+        'declared-price': 22.5,
+        'weight': 1,
+        'tracking-code': 'TDULS'
+    },{
+        'name': '[W] AQUATEC Diving Duo-Alert',
+        'price': 59.95,
+        'sale-tax': 0,
+        'shipping-cost': 6.95,
+        'declared-price': 27.5,
+        'weight': 1,
+        'tracking-code': 'ADDA'
+    },{
+        'name': '[W] Aquacraft Aluminum Scuba Diving Noise Signal',
+        'price': 19.75,
         'sale-tax': 0,
         'shipping-cost': 0,
-        'declared-price': 42.99,
-        'weight': 2.3,
-        'tracking-code': 'LeisurePro'
+        'declared-price': 10,
+        'weight': 0.22,
+        'tracking-code': 'AASDNS'
+#    },{
+#        'name': 'Mares Magnetic Shaker Accessory',
+#        'price': 25.97,
+#        'sale-tax': 0,
+#        'shipping-cost': 0,
+#        'declared-price': 12.99,
+#        'weight': 0.18,
+#        'tracking-code': 'MMSA'
+    },{
+        'name': '[W] Finger Reel with Brass Clip (160ft)',
+        'price': 14,
+        'sale-tax': 0,
+        'shipping-cost': 0,
+        'declared-price': 7,
+        'weight': 0.5,
+        'tracking-code': 'FRBC160'
+#    },{
+#        'name': 'XS Scuba Highland 10 ft. SMB',
+#        'price': 88.95,
+#        'sale-tax': 0,
+#        'shipping-cost': 0,
+#        'declared-price': 44.99,
+#        'weight': 2,
+#        'tracking-code': 'FRBC160'
+#    },{
+#        'name': '[W] Scuba Choice 6 ft Oral and Standard BC Hose Inflator',
+#        'price': 26.45,
+#        'sale-tax': 0,
+#        'shipping-cost': 0,
+#        'declared-price': 13.5,
+#        'weight': 0.25,
+#        'tracking-code': 'SC6OSBCHI'
+#    },{
+#        'name': 'Scuba Diving Tank O-Ring Dive Kit Keychain with Pick',
+#        'price': 12.5,
+#        'sale-tax': 0,
+#        'shipping-cost': 0,
+#        'declared-price': 6.25,
+#        'weight': 0.019,
+#        'tracking-code': 'SDTODKKP'
+    },{
+        'name': '[W] ACR Signaling Mirror',
+        'price': 15.83,
+        'sale-tax': 0,
+        'shipping-cost': 0,
+        'declared-price': 7.57,
+        'weight': 0.15,
+        'tracking-code': 'ACRSM'
+    },{
+        'name': '[W] Aduro U-GRIP Universal Mount',
+        'price': 19.95,
+        'sale-tax': 0,
+        'shipping-cost': 0,
+        'declared-price': 10,
+        'weight': 0.2,
+        'tracking-code': 'AUGRIPUM'
+    },{
+        'name': '[W] Pilot Juice Gel Ink Ballpoint Pen, 0.38 mm',
+        'price': 13.80,
+        'sale-tax': 0,
+        'shipping-cost': 0,
+        'declared-price': 7,
+        'weight': 0.28,
+        'tracking-code': 'PJGIBP038MM'
+    },{
+        'name': '[W] Scuba Choice 6 ft Oral and Standard BC Hose Inflator*',
+        'price': 45,
+        'sale-tax': 3.15,
+        'shipping-cost': 0,
+        'declared-price': 24.08,
+        'weight': 0.07,
+        'tracking-code': 'TIMB'
+    },{
+        'name': '[J] Alice in Wonderland Pocket Watch Infinity Scarf',
+        'price': 9.99,
+        'sale-tax': 0.7,
+        'shipping-cost': 0,
+        'declared-price': 4.99,
+        'weight': 0.11,
+        'tracking-code': 'AWPWIS'
+    },{
+        'name': '[J] Anime May the Force Be With You Ladies Hoodie - Black, M',
+        'price': 49.99,
+        'sale-tax': 3.5,
+        'shipping-cost': 0,
+        'declared-price': 26.5,
+        'weight': 0.88,
+        'tracking-code': 'AMFBWYLH'
+    },{
+        'name': '[J] Plush Zombie Slippers',
+        'price': 9.99,
+        'sale-tax': 0.7,
+        'shipping-cost': 0,
+        'declared-price': 4.99,
+        'weight': 0.75,
+        'tracking-code': 'PZS'
+    },{
+        'name': '[J] The Flash Cuff Beanie',
+        'price': 19.99,
+        'sale-tax': 1.39,
+        'shipping-cost': 0,
+        'declared-price': 10.99,
+        'weight': 0.15,
+        'tracking-code': 'PJGIBP038MM'
+    },{
+        'name': '[A] (!) One Night Ultimate Werewolf',
+        'price': 13.59,
+        'sale-tax': 0.00,
+        'shipping-cost': 0,
+        'declared-price': 6.5,
+        'weight': 0.48,
+        'tracking-code': 'ONUW'
+    },{
+        'name': '[A] (NO) Zombie Dice',
+        'price': 11.20,
+        'sale-tax': 0.00,
+        'shipping-cost': 0,
+        'declared-price': 6,
+        'weight': 0.38,
+        'tracking-code': 'ZD'
+    },{
+        'name': '[A] Forbidden Island',
+        'price': 12.99,
+        'sale-tax': 0.00,
+        'shipping-cost': 0,
+        'declared-price': 6.49,
+        'weight': 1.4,
+        'tracking-code': 'FI'
+    },{
+        'name': '[A] Smash Up Game',
+        'price': 18.99,
+        'sale-tax': 0.00,
+        'shipping-cost': 0,
+        'declared-price': 8.49,
+        'weight': 1.6,
+        'tracking-code': 'SUG'
+    },{
+        'name': '[A] Sushi Go! - The Pick and Pass Card Game',
+        'price': 8.57,
+        'sale-tax': 0.00,
+        'shipping-cost': 0,
+        'declared-price': 4.25,
+        'weight': 0.81,
+        'tracking-code': 'SGTPAPCC'
+    },{
+        'name': '[D] iPhone 5 5S SE screen protector',
+        'price': 6.95,
+        'sale-tax': 0.00,
+        'shipping-cost': 0,
+        'declared-price': 3.5,
+        'weight': 0.06,
+        'tracking-code': 'i5SSP'
+    },{
+        'name': '[D] ANGELLA-M Case For Apple iphone 5 5S Beautiful Flower',
+        'price': 0.01,
+        'sale-tax': 0.00,
+        'shipping-cost': 4.99,
+        'declared-price': 1.99,
+        'weight': 0.07,
+        'tracking-code': 'ACFAi5SBF'
     }
 ]
-
 
 class ShippingOrderItem(object):
 
