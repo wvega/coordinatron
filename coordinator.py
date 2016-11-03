@@ -246,16 +246,48 @@ def main():
     for i, shipping_order in enumerate(shipping_orders):
         print("Shipping Order #{0}".format(i))
 
+        shipping_costs = shipping_order.get_shipping_cost() + shipping_order.get_logistics_costs() + shipping_order.get_fuel_surcharge()
+        other_costs = shipping_order.get_taxes() + shipping_order.get_credit_card_surcharge() + shipping_order.get_insurance_cost()
+
+        total_cost = sum([i.get_cif() for i in shipping_order.items])
+        total_weight = sum([i.get_weight() for i in shipping_order.items])
+
+        print("  {0: <60s} {1: >9}   {2: >7}   {3: >8}   {4: >7}   {5: >7}   {6: >7}".format(
+            '',
+            'Weight',
+            'CIF',
+            'Shipping',
+            'Taxes*',
+            'Total',
+            'Total (COP)'
+        ))
+
         for item in shipping_order.items:
-            print("- {0}".format(item.product['name']))
+            shipping_ratio = item.get_weight() / total_weight
+            cost_ratio = item.get_cif() / total_cost
+
+            item_shipping_cost = shipping_ratio * shipping_costs
+            item_other_cost = cost_ratio * other_costs
+
+            item_cost = item.get_cif() + item_shipping_cost + item_other_cost
+
+            print("- {0: <60s} {1: >6.2f} lb   ${2: >6.2f}   ${3: >7.2f}   ${4: >6.2f}   ${5: >6.2f}   COP {6}".format(
+                item.product['name'][0:60],
+                item.get_weight(),
+                item.get_cif(),
+                item_shipping_cost,
+                item_other_cost,
+                item_cost,
+                '{0: >7,.0f}'.format(item_cost * TRM, True).replace(',', '.')
+            ))
 
         order_total = shipping_order.get_total()
         grand_total = grand_total + order_total
 
-        print("Total: {0}".format(order_total))
+        print("Total: ${0:.2f}".format(order_total))
         print("")
 
-    print("Grand Total: {0}".format(grand_total))
+    print("Grand Total: ${0:.2f}".format(grand_total))
 
 if __name__ == '__main__':
     main()
