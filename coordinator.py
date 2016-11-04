@@ -252,14 +252,15 @@ def main():
         total_cost = sum([i.get_cif() for i in shipping_order.items])
         total_weight = sum([i.get_weight() for i in shipping_order.items])
 
-        print("  {0: <60s} {1: >9}   {2: >7}   {3: >8}   {4: >7}   {5: >7}   {6: >7}".format(
+        print("  {0: <60s} {1: >9}   {2: >7}   {3: >8}   {4: >7}   {5: >7}   {6: >7}   {7: >5}".format(
             '',
             'Weight',
             'CIF',
             'Shipping',
             'Taxes*',
             'Total',
-            'Total (COP)'
+            'Total (COP)',
+            '%'
         ))
 
         for item in shipping_order.items:
@@ -271,14 +272,15 @@ def main():
 
             item_cost = item.get_cif() + item_shipping_cost + item_other_cost
 
-            print("- {0: <60s} {1: >6.2f} lb   ${2: >6.2f}   ${3: >7.2f}   ${4: >6.2f}   ${5: >6.2f}   COP {6}".format(
+            print("- {0: <60s} {1: >6.2f} lb   ${2: >6.2f}   ${3: >7.2f}   ${4: >6.2f}   ${5: >6.2f}   COP {6: >7}   {7: >5.2f}".format(
                 item.product['name'][0:60],
                 item.get_weight(),
                 item.get_cif(),
                 item_shipping_cost,
                 item_other_cost,
                 item_cost,
-                '{0: >7,.0f}'.format(item_cost * TRM, True).replace(',', '.')
+                '{0: >7,.0f}'.format(item_cost * TRM, True).replace(',', '.'),
+                100 * ( item_cost / item.get_cif() - 1 )
             ))
 
         order_total = shipping_order.get_total()
