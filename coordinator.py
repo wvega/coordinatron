@@ -41,7 +41,7 @@ class ShippingOrderItem(object):
         return self.product['shipping-cost']
 
     def get_weight(self):
-        return self.product['weight']
+        return float(self.product['weight'])
 
     def get_cif(self):
         return self.get_price() + self.get_shipping_cost()
